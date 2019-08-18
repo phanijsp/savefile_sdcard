@@ -8,17 +8,20 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
-
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        textView = (TextView) findViewById(R.id.textview);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                 && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             fos.write("Hello Aditya ! ".getBytes());
             fos.close();
             Toast.makeText(this,"Saved in"+Environment.getExternalStorageDirectory().getAbsolutePath()+"/aditya",Toast.LENGTH_SHORT).show();
+            textView.setText("File Saved in"+Environment.getExternalStorageDirectory().getAbsolutePath()+"/aditya");
         }catch (Exception e){
 
         }
